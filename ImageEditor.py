@@ -10,6 +10,8 @@ list = []
 class Editor:
     def __init__(self, master):
         self.draw = 0
+        self.coords = []
+
         self.master = master
 
         self.Image()
@@ -65,12 +67,14 @@ class Editor:
             if len(list) == 2:
                 self.canvas.create_rectangle(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
                 self.draw = 1
+                self.coords = list
 
         if self.SelectionType.get('active') == "  Circle" and x != -1 and y != -1 and self.draw == 0:
             self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
             if len(list) == 2:
                 self.canvas.create_oval(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
                 self.draw = 1
+                self.coords = list
 
         if self.SelectionType.get('active') == "  Other" and x != -1 and y != -1 and self.draw == 0:
             self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
@@ -83,9 +87,10 @@ class Editor:
             if i == len(list) - 1:
                 self.canvas.create_line(list[0][0], list[0][1], list[i][0], list[i][1], width=2)
         self.draw = 1
+        self.coords = list
 
     def Export(self):
-        print("")
+        print("infos : ", self.SelectionType.get('active'), self.coords, self.NameSelection.get())
 
 
 def ResizeImage(img, ScreenWidth):

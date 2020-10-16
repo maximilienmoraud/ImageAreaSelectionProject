@@ -69,7 +69,7 @@
       <option name="presentableId" value="Default" />
       <updated>1602753927926</updated>
       <workItem from="1602753943871" duration="20928000" />
-      <workItem from="1602836033908" duration="6248000" />
+      <workItem from="1602836033908" duration="6526000" />
     </task>
     <task id="LOCAL-00001" summary="Création des 2 fênetres (Classes que l'on va utiliser)">
       <created>1602758744499</created>
@@ -92,7 +92,14 @@
       <option name="project" value="LOCAL" />
       <updated>1602777021249</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="implementation de touts les methodes de saisie">
+      <created>1602842543358</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1602842543358</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -103,14 +110,15 @@
     <MESSAGE value="Création des 2 fênetres (Classes que l'on va utiliser)" />
     <MESSAGE value="taille image" />
     <MESSAGE value="on peut faire des petits points" />
-    <option name="LAST_COMMIT_MESSAGE" value="on peut faire des petits points" />
+    <MESSAGE value="implementation de touts les methodes de saisie" />
+    <option name="LAST_COMMIT_MESSAGE" value="implementation de touts les methodes de saisie" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="401" y="51" key="CommitChangelistDialog2" timestamp="1602777021109">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state x="535" y="127" key="CommitChangelistDialog2" timestamp="1602842543154">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="401" y="51" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1602777021109" />
-    <state x="535" y="127" key="CommitChangelistDialog2/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602758744316" />
+    <state x="535" y="127" key="CommitChangelistDialog2/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842543154" />
     <state x="788" y="455" key="Github.ShareDialog" timestamp="1602754027353">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
@@ -119,33 +127,33 @@
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="698" y="256" key="Github.UntrackedFilesDialog/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602754038377" />
-    <state width="1878" height="218" key="GridCell.Tab.0.bottom" timestamp="1602842467454">
+    <state width="1878" height="218" key="GridCell.Tab.0.bottom" timestamp="1602842749482">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="174" key="GridCell.Tab.0.bottom/0.23.1440.877@0.23.1440.877" timestamp="1602777058864" />
-    <state width="1878" height="218" key="GridCell.Tab.0.bottom/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842467454" />
-    <state width="1878" height="218" key="GridCell.Tab.0.center" timestamp="1602842467454">
+    <state width="1878" height="218" key="GridCell.Tab.0.bottom/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842749482" />
+    <state width="1878" height="218" key="GridCell.Tab.0.center" timestamp="1602842749481">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="174" key="GridCell.Tab.0.center/0.23.1440.877@0.23.1440.877" timestamp="1602777058863" />
-    <state width="1878" height="218" key="GridCell.Tab.0.center/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842467454" />
-    <state width="1878" height="218" key="GridCell.Tab.0.left" timestamp="1602842467453">
+    <state width="1878" height="218" key="GridCell.Tab.0.center/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842749481" />
+    <state width="1878" height="218" key="GridCell.Tab.0.left" timestamp="1602842749480">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="174" key="GridCell.Tab.0.left/0.23.1440.877@0.23.1440.877" timestamp="1602777058863" />
-    <state width="1878" height="218" key="GridCell.Tab.0.left/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842467453" />
-    <state width="1878" height="218" key="GridCell.Tab.0.right" timestamp="1602842467454">
+    <state width="1878" height="218" key="GridCell.Tab.0.left/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842749480" />
+    <state width="1878" height="218" key="GridCell.Tab.0.right" timestamp="1602842749481">
       <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state width="1398" height="174" key="GridCell.Tab.0.right/0.23.1440.877@0.23.1440.877" timestamp="1602777058863" />
-    <state width="1878" height="218" key="GridCell.Tab.0.right/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842467454" />
-    <state x="420" y="245" key="Vcs.Push.Dialog.v2" timestamp="1602777022859">
-      <screen x="0" y="23" width="1440" height="877" />
+    <state width="1878" height="218" key="GridCell.Tab.0.right/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842749481" />
+    <state x="560" y="291" key="Vcs.Push.Dialog.v2" timestamp="1602842545135">
+      <screen x="0" y="23" width="1920" height="1057" />
     </state>
     <state x="420" y="245" key="Vcs.Push.Dialog.v2/0.23.1440.877@0.23.1440.877" timestamp="1602777022859" />
-    <state x="560" y="291" key="Vcs.Push.Dialog.v2/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602758746405" />
+    <state x="560" y="291" key="Vcs.Push.Dialog.v2/1920.171.1440.877/0.23.1920.1057@0.23.1920.1057" timestamp="1602842545135" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/ImageAreaSelectionProject$main.coverage" NAME="main Coverage Results" MODIFIED="1602842467443" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/ImageAreaSelectionProject$main.coverage" NAME="main Coverage Results" MODIFIED="1602842749473" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>
