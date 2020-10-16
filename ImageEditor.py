@@ -11,6 +11,8 @@ class Editor:
     def __init__(self, master):
         self.draw = 0
         self.coords = []
+        self.type = ""
+        self.scale = 0
 
         self.master = master
 
@@ -40,7 +42,12 @@ class Editor:
 
     def Image(self):
         # Fonction qui permet d'afficher l'image
-        img = ImageTk.PhotoImage(ResizeImage(Image.open("Images/PhotoChat.jpg"), self.master.winfo_screenwidth()))
+        imgfullsize = Image.open("Images/PhotoChat.jpg")
+        OriginalWidth, OriginalHeight = imgfullsize.size
+        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
+        ResizedWidth, ResizedHeight = img.size
+        self.scale = OriginalWidth/ResizedWidth
+        img = ImageTk.PhotoImage(img)
         self.canvas = tk.Canvas(self.master, width=img.width(), height=img.height(), borderwidth=0,
                                 highlightthickness=0)
         self.canvas.pack(expand=True, side=TOP)
@@ -68,6 +75,7 @@ class Editor:
                 self.canvas.create_rectangle(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
                 self.draw = 1
                 self.coords = list
+                self.type = "Square"
 
         if self.SelectionType.get('active') == "  Circle" and x != -1 and y != -1 and self.draw == 0:
             self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
@@ -75,6 +83,7 @@ class Editor:
                 self.canvas.create_oval(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
                 self.draw = 1
                 self.coords = list
+                self.type = "Circle"
 
         if self.SelectionType.get('active') == "  Other" and x != -1 and y != -1 and self.draw == 0:
             self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
@@ -88,9 +97,11 @@ class Editor:
                 self.canvas.create_line(list[0][0], list[0][1], list[i][0], list[i][1], width=2)
         self.draw = 1
         self.coords = list
+        self.type = "Other"
 
     def Export(self):
-        print("infos : ", self.SelectionType.get('active'), self.coords, self.NameSelection.get())
+        if self.draw == 1:
+            print("infos : ", self.type, self.coords, self.NameSelection.get(), self.scale)
 
 
 def ResizeImage(img, ScreenWidth):
