@@ -1,18 +1,15 @@
 import tkinter as tk
 from tkinter import *
-from tkinter import filedialog
-import numpy as np
-from tkinter.messagebox import *
-
 from PIL import ImageTk, Image
 
-x = 0
-y = 0
+x = -1
+y = -1
 list = []
 
 
 class Editor:
     def __init__(self, master):
+        self.draw = 0
         self.master = master
 
         self.Image()
@@ -21,13 +18,19 @@ class Editor:
         self.SelectionType.insert(1, " Square")
         self.SelectionType.insert(2, "  Circle")
         self.SelectionType.insert(3, "  Other")
-        self.SelectionType.pack()
+        self.SelectionType.pack(side=LEFT, padx=10)
 
-        self.EditButton = tk.Button(self.master, text='Edit', width=25, command=test)
-        self.EditButton.pack(side=LEFT)
+        self.NameSelection = Entry(self.master)
+        self.NameSelection.pack(side=LEFT, padx=10)
+
+        self.SaveButton = tk.Button(self.master, text='Save', width=25, command=self.Export)
+        self.SaveButton.pack(side=BOTTOM)
+
+        self.ResetButton = tk.Button(self.master, text='Reset', width=25, command=self.ResetImage)
+        self.ResetButton.pack(side=BOTTOM)
 
         self.ExitButton = tk.Button(self.master, text='Quit', width=25, command=self.CloseWindow)
-        self.ExitButton.pack(side=RIGHT)
+        self.ExitButton.pack(side=BOTTOM)
 
     def CloseWindow(self):
         # Fonction qui permet de fermer la fenettre
@@ -38,14 +41,51 @@ class Editor:
         img = ImageTk.PhotoImage(ResizeImage(Image.open("Images/PhotoChat.jpg"), self.master.winfo_screenwidth()))
         self.canvas = tk.Canvas(self.master, width=img.width(), height=img.height(), borderwidth=0,
                                 highlightthickness=0)
-        self.canvas.pack(expand=True)
+        self.canvas.pack(expand=True, side=TOP)
         self.canvas.img = img
         self.canvas.create_image(0, 0, image=img, anchor=tk.NW)
         self.canvas.bind('<Button-1>', GetMousePos)
         self.canvas.bind('<Motion>', self.Mouvement)
 
+    def ResetImage(self):
+        onscreen = self.canvas.find_all()
+        for i in range(len(onscreen)):
+            if i != 0:
+                self.canvas.delete(onscreen[i])
+        list.clear()
+        global x
+        global y
+        x = -1
+        y = -1
+        self.draw = 0
+
     def Mouvement(self, zz):
-        self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
+        if self.SelectionType.get('active') == " Square" and x != -1 and y != -1 and self.draw == 0:
+            self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
+            if len(list) == 2:
+                self.canvas.create_rectangle(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
+                self.draw = 1
+
+        if self.SelectionType.get('active') == "  Circle" and x != -1 and y != -1 and self.draw == 0:
+            self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
+            if len(list) == 2:
+                self.canvas.create_oval(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
+                self.draw = 1
+
+        if self.SelectionType.get('active') == "  Other" and x != -1 and y != -1 and self.draw == 0:
+            self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
+            self.canvas.bind('<Button-2>', self.Trace)
+
+    def Trace(self, zz):
+        for i in range(len(list)):
+            if i < len(list) - 1:
+                self.canvas.create_line(list[i][0], list[i][1], list[i + 1][0], list[i + 1][1], width=2)
+            if i == len(list) - 1:
+                self.canvas.create_line(list[0][0], list[0][1], list[i][0], list[i][1], width=2)
+        self.draw = 1
+
+    def Export(self):
+        print("")
 
 
 def ResizeImage(img, ScreenWidth):
@@ -61,7 +101,3 @@ def GetMousePos(event):
     y = event.y
     pos = x, y
     list.append(pos)
-
-
-def test():
-    print(list)
