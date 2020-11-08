@@ -21,35 +21,51 @@ class Editor:
 
         self.Image()
 
-        self.BoutonsForme = tk.Frame(self.master)
-        self.BoutonsForme.pack(side=TOP)
-        self.SquareButton = tk.Button(self.BoutonsForme, text='Rectangle', width=25, command=self.Square)
+        self.Titre1 = tk.Label(self.master, text='Choix du type de forme', pady=10)
+        self.Titre1.pack(side=TOP)
+
+        self.FormFrame = tk.Frame(self.master)
+        self.FormFrame.pack(side=TOP)
+        self.SquareButton = tk.Button(self.FormFrame, text='Rectangle', width=40, height=3, command=self.Square)
         self.SquareButton.pack(side=LEFT)
-        self.CircleButton = tk.Button(self.BoutonsForme, text='Cercle', width=25, command=self.Circle)
+        self.CircleButton = tk.Button(self.FormFrame, text='Cercle', width=40, height=3, command=self.Circle)
         self.CircleButton.pack(side=LEFT)
-        self.FreeButton = tk.Button(self.BoutonsForme, text='Forme libre', width=25, command=self.Free)
+        self.FreeButton = tk.Button(self.FormFrame, text='Forme libre', width=40, height=3, command=self.Free)
         self.FreeButton.pack(side=LEFT)
-        self.BoutonsSave = tk.Frame(self.master)
-        self.BoutonsSave.pack(side=TOP)
-        self.Categorie = ttk.Combobox(self.BoutonsSave, values=categorie)
+
+        self.Titre2 = tk.Label(self.master, text='Choix de la catégorie de la forme', pady=10)
+        self.Titre2.pack(side=TOP)
+
+        self.CategorieFrame = tk.Frame(self.master)
+        self.CategorieFrame.pack(side=TOP)
+        self.Categorie = ttk.Combobox(self.CategorieFrame, values=categorie, width=60)
         self.Categorie.pack(side=LEFT)
         self.Categorie.bind("<<ComboboxSelected>>", self.ActionCombobox)
-        self.SaveButton = tk.Button(self.BoutonsSave, text='Enregistrer la forme', width=25, command=self.Export)
-        self.SaveButton.pack(side=RIGHT)
-        self.NameSelection = Entry(self.BoutonsSave)
-        self.NameSelection.pack(side=RIGHT)
 
-        self.ExitButton = tk.Button(self.master, text='Terminer les modifications', width=25, command=self.CloseWindow)
+        self.Titre3 = tk.Label(self.master, text='Choix du nom de la forme', pady=10)
+        self.Titre3.pack(side=TOP)
+
+        self.NameSaveFrame = tk.Frame(self.master)
+        self.NameSaveFrame.pack(side=TOP)
+        self.NameSelection = Entry(self.NameSaveFrame, width=60)
+        self.NameSelection.pack(side=LEFT)
+        self.SaveButton = tk.Button(self.NameSaveFrame, text='Enregistrer la forme', width=60, command=self.Export)
+        self.SaveButton.pack(side=RIGHT)
+
+        self.Titre4 = tk.Label(self.master, text=' ')
+        self.Titre4.pack(side=TOP)
+
+        self.ExitButton = tk.Button(self.master, text='Terminer les modifications', width=120, command=self.CloseWindow)
         self.ExitButton.pack(side=TOP)
 
     def ActionCombobox(self, event):
         select = self.Categorie.get()
         if select == "Nouveau":
             self.NameSelection.delete(0, END)
-            self.AutreCategorie = Entry(self.BoutonsSave)
+            self.AutreCategorie = Entry(self.CategorieFrame, width=60)
             self.AutreCategorie.pack(side=LEFT)
         else:
-            self.AutreCategorie = Entry(self.BoutonsSave)
+            self.AutreCategorie = Entry(self.NameSaveFrame)
             self.AutreCategorie.insert(END, select)
             self.NameSelection.delete(0, END)
             self.NameSelection.insert(END, select + '1')
@@ -110,7 +126,6 @@ class Editor:
                 self.canvas.create_rectangle(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
                 self.draw = 1
                 self.coords = list
-                self.type = "Square"
 
         if formtype == "Circle" and x != -1 and y != -1 and self.draw == 0:
             self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
@@ -118,7 +133,6 @@ class Editor:
                 self.canvas.create_oval(list[0][0], list[0][1], list[1][0], list[1][1], width=2, outline="black")
                 self.draw = 1
                 self.coords = list
-                self.type = "Circle"
 
         if formtype == "Free" and x != -1 and y != -1 and self.draw == 0:
             self.canvas.create_oval(x - 1, y - 1, x + 1, y + 1, width=2, outline="black")
@@ -132,7 +146,6 @@ class Editor:
                 self.canvas.create_line(list[0][0], list[0][1], list[i][0], list[i][1], width=2)
         self.draw = 1
         self.coords = list
-        self.type = "Free"
 
     def Export(self):
         if self.draw == 1:
