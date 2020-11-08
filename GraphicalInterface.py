@@ -1,7 +1,6 @@
 import tkinter as tk
 import ImageEditor
 
-
 class Menu:
     def __init__(self, master):
         self.master = master
