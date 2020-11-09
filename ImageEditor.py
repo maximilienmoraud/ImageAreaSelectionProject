@@ -1,4 +1,5 @@
 import tkinter as tk
+import tkinter.font as tkFont
 from tkinter import *
 from tkinter import ttk
 from PIL import ImageTk, Image
@@ -18,77 +19,94 @@ class Editor:
         self.scale = 0
 
         self.master = master
-
+        self.master.configure(bg = '#2B2B2B')
         self.Image()
 
-        self.Titre1 = tk.Label(self.master, text='Choix du type de forme', pady=10)
+        self.fontStyle0 = tkFont.Font(size=16)
+        self.fontStyle1 = tkFont.Font(size=15)
+        self.fontStyle2 = tkFont.Font(size=11, weight='bold')
+        self.fontStyle3 = tkFont.Font(size=10)
+
+        self.Titre1 = tk.Label(self.master, font=self.fontStyle2, background='#2B2B2B', foreground='white', text='Choix du type de forme', pady=10)
         self.Titre1.pack(side=TOP)
 
         self.FormFrame = tk.Frame(self.master)
         self.FormFrame.pack(side=TOP)
-        self.SquareButton = tk.Button(self.FormFrame, text='Rectangle', width=40, height=3, command=self.Square)
+        self.SquareButton = tk.Button(self.FormFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Rectangle', width=40, height=2, command=self.Square)
         self.SquareButton.pack(side=LEFT)
-        self.CircleButton = tk.Button(self.FormFrame, text='Cercle', width=40, height=3, command=self.Circle)
+        self.CircleButton = tk.Button(self.FormFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Cercle', width=40, height=2, command=self.Circle)
         self.CircleButton.pack(side=LEFT)
-        self.FreeButton = tk.Button(self.FormFrame, text='Forme libre', width=40, height=3, command=self.Free)
+        self.FreeButton = tk.Button(self.FormFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Forme libre', width=40, height=2, command=self.Free)
         self.FreeButton.pack(side=LEFT)
 
-        self.Titre2 = tk.Label(self.master, text='Choix de la catégorie de la forme', pady=10)
+        self.Titre2 = tk.Label(self.master, font=self.fontStyle2, background='#2B2B2B', foreground='white', text='Choix de la catégorie de la forme', pady=10)
         self.Titre2.pack(side=TOP)
 
         self.CategorieFrame = tk.Frame(self.master)
         self.CategorieFrame.pack(side=TOP)
-        self.Categorie = ttk.Combobox(self.CategorieFrame, values=categorie, width=60)
+        self.Categorie = ttk.Combobox(self.CategorieFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', values=categorie, width=60)
         self.Categorie.pack(side=LEFT)
         self.Categorie.bind("<<ComboboxSelected>>", self.ActionCombobox)
 
-        self.Titre3 = tk.Label(self.master, text='Choix du nom de la forme', pady=10)
+        self.Titre3 = tk.Label(self.master, font=self.fontStyle2, background='#2B2B2B', foreground='white', text='Choix du nom de la forme', pady=10)
         self.Titre3.pack(side=TOP)
 
         self.NameSaveFrame = tk.Frame(self.master)
         self.NameSaveFrame.pack(side=TOP)
-        self.NameSelection = Entry(self.NameSaveFrame, width=60)
+        self.NameSelection = Entry(self.NameSaveFrame, font=self.fontStyle0, background='#3B3F42', foreground='white', width=40)
         self.NameSelection.pack(side=LEFT)
-        self.SaveButton = tk.Button(self.NameSaveFrame, text='Enregistrer la forme', width=60, command=self.Export)
+        self.SaveButton = tk.Button(self.NameSaveFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Enregistrer la forme', height=1, width=60, command=self.Export)
         self.SaveButton.pack(side=RIGHT)
 
-        self.Titre4 = tk.Label(self.master, text=' ')
-        self.Titre4.pack(side=TOP)
+        self.AlerteFrame = tk.Frame(self.master)
+        self.AlerteFrame.pack(side=TOP)
+        self.AlerteName = tk.Label(self.AlerteFrame, text='Nom déjà attribué !', font=self.fontStyle2, background='#2B2B2B',  foreground='#2B2B2B', width=60, pady=10)
+        self.AlerteName.pack(side=LEFT)
+        self.AlerteSave = tk.Label(self.AlerteFrame, text='Enregistrement réussi !', font=self.fontStyle2, background='#2B2B2B',  foreground='#2B2B2B', width=60, pady=10)
+        self.AlerteSave.pack(side=RIGHT)
 
-        self.ExitButton = tk.Button(self.master, text='Terminer les modifications', width=120, command=self.CloseWindow)
+        self.ExitButton = tk.Button(self.master, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Terminer les modifications', width=120, command=self.CloseWindow)
         self.ExitButton.pack(side=TOP)
+        self.Titre4 = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ',)
+        self.Titre4.pack(side=TOP)
 
     def ActionCombobox(self, event):
         select = self.Categorie.get()
         if select == "Nouveau":
             self.NameSelection.delete(0, END)
-            self.AutreCategorie = Entry(self.CategorieFrame, width=60)
+            self.AutreCategorie = Entry(self.CategorieFrame, font=self.fontStyle1, background='#3B3F42', foreground='white', width=40)
             self.AutreCategorie.pack(side=LEFT)
         else:
             self.AutreCategorie = Entry(self.NameSaveFrame)
             self.AutreCategorie.insert(END, select)
             self.NameSelection.delete(0, END)
-            self.NameSelection.insert(END, select + '1')
+            self.NameSelection.insert(END, select)
 
     def Square(self):
         print('def square')
         global formtype
         formtype = "Square"
-        self.ResetImage()
+        self.Reset()
+        self.SaveButton.configure(background='#3B3F42')
+        self.AlerteSave.configure(foreground='#2B2B2B')
 
     def Circle(self):
         print('def Circle')
         global formtype
         formtype = "Circle"
-        self.ResetImage()
+        self.Reset()
+        self.SaveButton.configure(background='#3B3F42')
+        self.AlerteSave.configure(foreground='#2B2B2B')
 
     def Free(self):
         print('def Free')
         global formtype
         formtype = "Free"
-        self.ResetImage()
+        self.Reset()
+        self.SaveButton.configure(background='#3B3F42')
+        self.AlerteSave.configure(foreground='#2B2B2B')
 
-    def ResetImage(self):
+    def Reset(self):
         onscreen = self.canvas.find_all()
         for i in range(len(onscreen)):
             if i != 0:
@@ -99,6 +117,8 @@ class Editor:
         x = -1
         y = -1
         self.draw = 0
+        self.NameSelection.delete(0, END)
+        self.Categorie.set('')
 
     def CloseWindow(self):
         # Fonction qui permet de fermer la fenettre
@@ -107,6 +127,7 @@ class Editor:
     def Image(self):
         # Fonction qui permet d'afficher l'image
         imgfullsize = Image.open("Images/PhotoChat.jpg")
+        self.imagename = 'PhotoChat.jpg'
         OriginalWidth, OriginalHeight = imgfullsize.size
         img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
         ResizedWidth, ResizedHeight = img.size
@@ -149,13 +170,22 @@ class Editor:
 
     def Export(self):
         if self.draw == 1:
-            if self.Categorie.get() == 'Nouveau':
-                global categorie
-                categorie.append(self.AutreCategorie.get())
-                CSVParser.WriteCategorie(categorie)
-            print("infos : ", self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale)
-            form = [self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale]
-            CSVParser.ExportForm(form)
+            if CSVParser.Existedeja(self.imagename, self.NameSelection.get())==1:
+                self.AlerteName.configure(foreground='red')
+                self.NameSelection.configure(background='red')
+            else:
+                if self.Categorie.get() == 'Nouveau':
+                    global categorie
+                    categorie.append(self.AutreCategorie.get())
+                    CSVParser.WriteCategorie(categorie)
+                self.AlerteName.configure(foreground='#2B2B2B')
+                self.NameSelection.configure(background='#2B2B2B')
+                self.SaveButton.configure(background='green')
+                self.AlerteSave.configure(foreground='green')
+                print(self.imagename, self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale)
+                form = [self.imagename, self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale]
+                CSVParser.ExportForm(form)
+                self.Reset()
 
 
 def ResizeImage(img, ScreenWidth):
