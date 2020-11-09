@@ -25,7 +25,6 @@ class Editor:
         self.fontStyle0 = tkFont.Font(size=16)
         self.fontStyle1 = tkFont.Font(size=15)
         self.fontStyle2 = tkFont.Font(size=11, weight='bold')
-        self.fontStyle3 = tkFont.Font(size=10)
 
         self.Titre1 = tk.Label(self.master, font=self.fontStyle2, background='#2B2B2B', foreground='white', text='Choix du type de forme', pady=10)
         self.Titre1.pack(side=TOP)
@@ -87,6 +86,12 @@ class Editor:
         global formtype
         formtype = "Square"
         self.Reset()
+        self.SquareButton.configure(background='#4E5253')
+        self.SquareButton.configure(relief='sunken')
+        self.CircleButton.configure(background='#3B3F42')
+        self.CircleButton.configure(relief='raised')
+        self.FreeButton.configure(background='#3B3F42')
+        self.FreeButton.configure(relief='raised')
         self.SaveButton.configure(background='#3B3F42')
         self.AlerteSave.configure(foreground='#2B2B2B')
 
@@ -95,6 +100,12 @@ class Editor:
         global formtype
         formtype = "Circle"
         self.Reset()
+        self.CircleButton.configure(background='#4E5253')
+        self.CircleButton.configure(relief='sunken')
+        self.SquareButton.configure(background='#3B3F42')
+        self.SquareButton.configure(relief='raised')
+        self.FreeButton.configure(background='#3B3F42')
+        self.FreeButton.configure(relief='raised')
         self.SaveButton.configure(background='#3B3F42')
         self.AlerteSave.configure(foreground='#2B2B2B')
 
@@ -103,6 +114,12 @@ class Editor:
         global formtype
         formtype = "Free"
         self.Reset()
+        self.FreeButton.configure(background='#4E5253')
+        self.FreeButton.configure(relief='sunken')
+        self.CircleButton.configure(background='#3B3F42')
+        self.CircleButton.configure(relief='raised')
+        self.SquareButton.configure(background='#3B3F42')
+        self.SquareButton.configure(relief='raised')
         self.SaveButton.configure(background='#3B3F42')
         self.AlerteSave.configure(foreground='#2B2B2B')
 
@@ -186,7 +203,6 @@ class Editor:
                 form = [self.imagename, self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale]
                 CSVParser.ExportForm(form)
                 self.Reset()
-
 
 def ResizeImage(img, ScreenWidth):
     originalWidth, originalHeight = img.size
