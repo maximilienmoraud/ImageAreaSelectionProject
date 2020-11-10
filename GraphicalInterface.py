@@ -20,38 +20,67 @@ class Menu:
         self.fontStyle1 = tkFont.Font(size=15)
         self.fontStyle2 = tkFont.Font(size=11, weight='bold')
 
+        self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
+        self.Separation.pack(side=LEFT)
+
         self.ListFile = tk.Frame(self.master)
         self.ListFile.pack(side=LEFT)
         self.EditButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Edit', width=25, command=self.OpenEditor)
-        self.ExitButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Exit', width=25, command=self.CloseWindow)
         self.EditButton.pack(side=TOP)
-        self.ExitButton.pack(side=TOP)
+
+        self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
+        self.Separation.pack(side=LEFT)
 
         self.Image()
+
+        self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
+        self.Separation.pack(side=LEFT)
 
         self.ListFrame = tk.Frame(self.master)
         self.ListFrame.pack(side=LEFT)
 
-        self.ListeCategorie = tk.Listbox(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',)
-        categorie = CSVParser.FiltreCategorie('PhotoChat.jpg')
-        l = len(categorie)
-        i = 0
-        while i < l:
-            self.ListeCategorie.insert(END, categorie[i])
-            i = i+1
+        self.ListeCategorie = tk.Listbox(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', width='30')
+        self.ListeName = tk.Listbox(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', width='30')
+        self.Actualise(0)
         self.ListeCategorie.pack(side=TOP)
-
-        self.ListeName = tk.Listbox(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',)
-        name = CSVParser.FiltreName('PhotoChat.jpg', 'Objet')
-        l = len(name)
-        i = 0
-        while i < l:
-            self.ListeName.insert(END, name[i])
-            i = i+1
         self.ListeName.pack(side=TOP)
+        self.ListeCategorie.bind("<<ListboxSelect>>", self.Select)
 
-        #self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',text='Supprimer', width=25, command=CSVParser.SupprimeForm('PhotoChat.jpg', 'Objet', 'fenetre'))
-        #self.SupprButton.pack(side=TOP)
+        self.ActualiseButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',text='Actualiser', width=26, command= lambda a=0:self.Actualise(a))
+        self.ActualiseButton.pack(side=TOP)
+
+        self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',text='Supprimer', width=26)
+        self.SupprButton.pack(side=TOP)
+        self.SupprButton.bind('<Button-1>', lambda a='test', b='PhotoChat.jpg', c='Objet', d='Fenetre': CSVParser.SupprimeForm(a, b, c, d))
+
+        self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
+        self.Separation.pack(side=LEFT)
+
+    def Select(self, event):
+        index = self.ListeCategorie.curselection()
+        self.Actualise(index)
+
+    def Actualise(self, index):
+        print('Actualisation ok')
+        categorie = CSVParser.FiltreCategorie('PhotoChat.jpg')
+        i = len(categorie)
+        j = 0
+        self.ListeCategorie.delete(0, END)
+        while j < i:
+            self.ListeCategorie.insert(END, categorie[j])
+            j = j + 1
+        print(index)
+        self.ListeCategorie.selection_set(index)
+        print(self.ListeCategorie.curselection())
+        print(self.ListeCategorie.get(self.ListeCategorie.curselection()))
+
+        name = CSVParser.FiltreName('PhotoChat.jpg', self.ListeCategorie.get(self.ListeCategorie.curselection()))
+        k = len(name)
+        l = 0
+        self.ListeName.delete(0, END)
+        while l < k:
+            self.ListeName.insert(END, name[l])
+            l = l + 1
 
     def Image(self):
         # Fonction qui permet d'afficher l'image
@@ -70,9 +99,6 @@ class Menu:
     def OpenEditor(self):
         self.newWindow = tk.Toplevel(self.master)
         self.app = ImageEditor.Editor(self.newWindow)
-
-    def CloseWindow(self):
-        self.master.destroy()
 
 def ResizeImage(img, ScreenWidth):
     originalWidth, originalHeight = img.size

@@ -46,14 +46,33 @@ def FiltreName(image, categorie):
                     list.append(row[2])
         return list
 
-def SupprimeForm(image, categorie, name):
-    lines = list()
-    with open('data.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=':')
-        for row in csv_reader:
-            if len(row) != 0:
-                if (row[0] != image) & (row[1] != categorie) & (row[2] != name):
-                    lines.append(row)
+def SupprimeForm(test, image, categorie, name):
+    print(image)
+    print(categorie)
+    print(name)
+    with open('temp.csv', mode='a') as csv_temp:
+        csv_writer = csv.writer(csv_temp, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        with open('data.csv', mode='r') as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=':')
+            for row in csv_reader:
+                if len(row) != 0:
+                    if (row[0] == image)&(row[1] == categorie)&(row[2] == name):
+                        print('supprime')
+                    else:
+                        csv_writer.writerow(row)
+
     with open('data.csv', mode='w') as csv_file:
-        csv_writer = csv.writer(csv_file)
-        csv_writer.writerow(lines)
+        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow('')
+
+    with open('data.csv', mode='a') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        with open('temp.csv', mode='r') as csv_temp:
+            csv_reader = csv.reader(csv_temp, delimiter=':')
+            for row in csv_reader:
+                if len(row) != 0:
+                    csv_writer.writerow(row)
+
+    with open('temp.csv', mode='w') as csv_file:
+        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer.writerow('')
