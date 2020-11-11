@@ -6,6 +6,10 @@ from PIL import ImageTk, Image
 import CSVParser
 import ImageEditor
 
+tempcategorie = 0
+tempname = 0
+iscreate = 0
+
 class Menu:
     def __init__(self, master):
         self.draw = 0
@@ -41,27 +45,50 @@ class Menu:
 
         self.ListeCategorie = tk.Listbox(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', width='30')
         self.ListeName = tk.Listbox(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', width='30')
-        self.Actualise(0)
+        self.ActualiseCategorie()
+        self.ActualiseName()
         self.ListeCategorie.pack(side=TOP)
         self.ListeName.pack(side=TOP)
-        self.ListeCategorie.bind("<<ListboxSelect>>", self.Select)
-
-        self.ActualiseButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',text='Actualiser', width=26, command= lambda a=0:self.Actualise(a))
-        self.ActualiseButton.pack(side=TOP)
-
-        self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white',text='Supprimer', width=26)
-        self.SupprButton.pack(side=TOP)
-        self.SupprButton.bind('<Button-1>', lambda a='test', b='PhotoChat.jpg', c='Objet', d='Fenetre': CSVParser.SupprimeForm(a, b, c, d))
+        self.ListeCategorie.bind("<<ListboxSelect>>", self.SelectCategorie)
+        self.ListeName.bind("<<ListboxSelect>>", self.SelectName)
 
         self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
         self.Separation.pack(side=LEFT)
 
-    def Select(self, event):
-        index = self.ListeCategorie.curselection()
-        self.Actualise(index)
+    def SelectCategorie(self, event):
+        global tempcategorie
+        if len(self.ListeCategorie.curselection())>0:
+            temp=self.ListeCategorie.curselection()
+            tempcategorie=int(temp[0])
+            self.ActualiseCategorie()
+            self.ActualiseName()
+        self.ActualiseCategorie()
+        print(tempcategorie)
 
-    def Actualise(self, index):
-        print('Actualisation ok')
+    def SelectName(self, event):
+        global tempname
+        global iscreate
+        print('new selected name')
+        if len(self.ListeName.curselection())>0:
+            temp=self.ListeName.curselection()
+            tempname=int(temp[0])
+        print(tempname)
+        if iscreate == 0:
+            self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Supprimer', width=26)
+            self.SupprButton.pack(side=TOP)
+            print(tempcategorie)
+            print(tempname)
+            self.SupprButton.bind('<Button-1>', lambda a='test', b='PhotoChat.jpg', c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
+            iscreate = 1
+        if iscreate == 1:
+            self.SupprButton.destroy()
+            self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Supprimer', width=26)
+            self.SupprButton.pack(side=TOP)
+            print(tempcategorie)
+            print(tempname)
+            self.SupprButton.bind('<Button-1>', lambda a='test', b='PhotoChat.jpg', c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
+
+    def ActualiseCategorie(self):
         categorie = CSVParser.FiltreCategorie('PhotoChat.jpg')
         i = len(categorie)
         j = 0
@@ -69,18 +96,19 @@ class Menu:
         while j < i:
             self.ListeCategorie.insert(END, categorie[j])
             j = j + 1
-        print(index)
-        self.ListeCategorie.selection_set(index)
-        print(self.ListeCategorie.curselection())
-        print(self.ListeCategorie.get(self.ListeCategorie.curselection()))
+        self.ListeCategorie.selection_set(tempcategorie)
+        print('Actualisation Categorie Ok')
 
-        name = CSVParser.FiltreName('PhotoChat.jpg', self.ListeCategorie.get(self.ListeCategorie.curselection()))
+    def ActualiseName(self):
+        name = CSVParser.FiltreName('PhotoChat.jpg', self.ListeCategorie.get(tempcategorie))
         k = len(name)
         l = 0
         self.ListeName.delete(0, END)
         while l < k:
             self.ListeName.insert(END, name[l])
             l = l + 1
+        self.ListeCategorie.selection_set(0)
+        print('Actualisation Name Ok')
 
     def Image(self):
         # Fonction qui permet d'afficher l'image

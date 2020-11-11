@@ -1,5 +1,6 @@
 #import pandas as pd
 import csv
+import GraphicalInterface
 
 def ReadCategorie():
     with open('categorie.csv') as csv_file:
@@ -47,6 +48,8 @@ def FiltreName(image, categorie):
         return list
 
 def SupprimeForm(test, image, categorie, name):
+    print(GraphicalInterface.tempcategorie)
+    print(GraphicalInterface.tempname)
     print(image)
     print(categorie)
     print(name)
