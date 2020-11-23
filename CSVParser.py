@@ -80,3 +80,23 @@ def SupprimeForm(test, image, categorie, name):
     with open('temp.csv', mode='w') as csv_file:
         csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow('')
+
+def RecupCoord(image_name, category, form_name):
+    form_type = None
+    scale = None
+    coords = []
+
+    with open('data.csv', mode='r') as csv_file:
+        csv_reader = csv.reader(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+
+        for line in csv_reader:
+            if line: # On verifie que la liste ne soit pas vide
+                if line[:3] == [image_name, category, form_name]:
+                    form_type = line[3]
+                    scale = float(line[5])
+                    for points in line[4][2:-2].split('), ('):
+                        x, y = point.split(', ')
+                        coords.append((int(x), int(y)))
+                    break
+
+    return form_type, coords, scale
