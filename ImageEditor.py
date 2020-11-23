@@ -188,7 +188,7 @@ class Editor:
 
     def Export(self):
         if self.draw == 1:
-            if CSVParser.Existedeja(self.imagename, self.NameSelection.get())==1:
+            if CSVParser.ExisteDeja(self.imagename, self.NameSelection.get()):
                 self.AlerteName.configure(foreground='red')
                 self.NameSelection.configure(background='red')
             else:

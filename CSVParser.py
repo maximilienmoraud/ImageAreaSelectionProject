@@ -18,13 +18,14 @@ def ExportForm(list):
         csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(list)
 
-def Existedeja(image, formnane):
+def ExisteDeja(image, formnane):
     with open('data.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=":")
         for row in csv_reader:
             if len(row)!=0:
                 if (row[0]==image)&(row[2]==formnane):
-                    return 1
+                    return True
+    return False
 
 def FiltreCategorie(image):
     with open('data.csv') as csv_file:
