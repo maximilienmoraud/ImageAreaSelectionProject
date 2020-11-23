@@ -95,7 +95,7 @@ def RecupCoord(image_name, category, form_name):
                     form_type = line[3]
                     scale = float(line[5])
                     for points in line[4][2:-2].split('), ('):
-                        x, y = point.split(', ')
+                        x, y = points.split(', ')
                         coords.append((int(x), int(y)))
                     break
 
