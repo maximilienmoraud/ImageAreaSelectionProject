@@ -144,8 +144,8 @@ class Editor:
 
     def Image(self):
         # Fonction qui permet d'afficher l'image
-        imgfullsize = Image.open("Images/PhotoChat.jpg")
-        self.imagename = 'PhotoChat.jpg'
+        imgfullsize = Image.open(GraphicalInterface.data)
+        self.imagename = GraphicalInterface.data
         OriginalWidth, OriginalHeight = imgfullsize.size
         img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
         ResizedWidth, ResizedHeight = img.size

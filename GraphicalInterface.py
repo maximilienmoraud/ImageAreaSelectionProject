@@ -1,7 +1,7 @@
+from tkinter import *
 import tkinter as tk
 import tkinter.font as tkFont
-from tkinter import *
-from tkinter import ttk
+from tkfilebrowser import askopenfilename
 from PIL import ImageTk, Image
 import CSVParser
 import ImageEditor
@@ -9,6 +9,7 @@ import ImageEditor
 tempcategorie = 0
 tempname = 0
 iscreate = 0
+data = 'Images/PhotoChat.jpg'
 
 class Menu:
     def __init__(self, master):
@@ -29,8 +30,12 @@ class Menu:
 
         self.ListFile = tk.Frame(self.master)
         self.ListFile.pack(side=LEFT)
+
+        self.FileButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Open File', width=25, command=self.OpenFile)
+        self.FileButton.pack(side=TOP)
+
         self.EditButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Edit', width=25, command=self.OpenEditor)
-        self.EditButton.pack(side=TOP)
+        self.EditButton.pack(side=BOTTOM)
 
         self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
         self.Separation.pack(side=LEFT)
@@ -78,7 +83,7 @@ class Menu:
             self.SupprButton.pack(side=TOP)
             print(tempcategorie)
             print(tempname)
-            self.SupprButton.bind('<Button-1>', lambda a='test', b='PhotoChat.jpg', c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
+            self.SupprButton.bind('<Button-1>', lambda a='test', b=data, c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
             iscreate = 1
         if iscreate == 1:
             self.SupprButton.destroy()
@@ -86,10 +91,10 @@ class Menu:
             self.SupprButton.pack(side=TOP)
             print(tempcategorie)
             print(tempname)
-            self.SupprButton.bind('<Button-1>', lambda a='test', b='PhotoChat.jpg', c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
+            self.SupprButton.bind('<Button-1>', lambda a='test', b=data, c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
 
     def ActualiseCategorie(self):
-        categorie = CSVParser.FiltreCategorie('PhotoChat.jpg')
+        categorie = CSVParser.FiltreCategorie(data)
         i = len(categorie)
         j = 0
         self.ListeCategorie.delete(0, END)
@@ -100,7 +105,7 @@ class Menu:
         print('Actualisation Categorie Ok')
 
     def ActualiseName(self):
-        name = CSVParser.FiltreName('PhotoChat.jpg', self.ListeCategorie.get(tempcategorie))
+        name = CSVParser.FiltreName(data, self.ListeCategorie.get(tempcategorie))
         k = len(name)
         l = 0
         self.ListeName.delete(0, END)
@@ -112,8 +117,8 @@ class Menu:
 
     def Image(self):
         # Fonction qui permet d'afficher l'image
-        imgfullsize = Image.open("Images/PhotoChat.jpg")
-        self.imagename = 'PhotoChat.jpg'
+        imgfullsize = Image.open(data)
+        self.imagename = data
         OriginalWidth, OriginalHeight = imgfullsize.size
         img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
         ResizedWidth, ResizedHeight = img.size
@@ -127,6 +132,11 @@ class Menu:
     def OpenEditor(self):
         self.newWindow = tk.Toplevel(self.master)
         self.app = ImageEditor.Editor(self.newWindow)
+
+    def OpenFile(self):
+        global data
+        data = askopenfilename()
+        print(data)
 
 def ResizeImage(img, ScreenWidth):
     originalWidth, originalHeight = img.size
