@@ -9,7 +9,8 @@ import ImageEditor
 tempcategorie = 0
 tempname = 0
 iscreate = 0
-data = 'Images/PhotoChat.jpg'
+canvas = 0
+data = 'Images/Accueil.jpg'
 
 class Menu:
     def __init__(self, master):
@@ -31,14 +32,17 @@ class Menu:
         self.ListFile = tk.Frame(self.master)
         self.ListFile.pack(side=LEFT)
 
-        self.FileButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Open File', width=25, command=self.OpenFile)
+        self.FileButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Ouvrir un fichier', width=25, command=self.OpenFile)
         self.FileButton.pack(side=TOP)
 
-        self.EditButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Edit', width=25, command=self.OpenEditor)
+        self.EditButton = tk.Button(self.ListFile, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Créer des formes', width=25, command=self.OpenEditor)
         self.EditButton.pack(side=BOTTOM)
 
         self.Separation = tk.Label(self.master, background='#2B2B2B', foreground='white', text=' ', padx='5')
         self.Separation.pack(side=LEFT)
+
+        self.ImageZone = tk.Frame(self.master)
+        self.ImageZone.pack(side=LEFT)
 
         self.Image()
 
@@ -117,6 +121,7 @@ class Menu:
 
     def Image(self):
         # Fonction qui permet d'afficher l'image
+        global canvas
         imgfullsize = Image.open(data)
         self.imagename = data
         OriginalWidth, OriginalHeight = imgfullsize.size
@@ -124,18 +129,30 @@ class Menu:
         ResizedWidth, ResizedHeight = img.size
         self.scale = OriginalWidth/ResizedWidth
         img = ImageTk.PhotoImage(img)
-        self.canvas = tk.Canvas(self.master, width=img.width(), height=img.height(), borderwidth=0, highlightthickness=0)
-        self.canvas.pack(expand=True, side=LEFT)
-        self.canvas.img = img
-        self.canvas.create_image(0, 0, image=img, anchor=tk.NW)
+        if canvas == 0:
+            self.canvas = tk.Canvas(self.ImageZone, width=img.width(), height=img.height(), borderwidth=0, highlightthickness=0)
+            self.canvas.pack(expand=True, side=TOP)
+            self.canvas.img = img
+            self.canvas.create_image(0, 0, image=img, anchor=tk.NW)
+            canvas = 1
+        if canvas == 1:
+            self.canvas.destroy()
+            self.canvas = tk.Canvas(self.ImageZone, width=img.width(), height=img.height(), borderwidth=0, highlightthickness=0)
+            self.canvas.pack(expand=True, side=TOP)
+            self.canvas.img = img
+            self.canvas.create_image(0, 0, image=img, anchor=tk.NW)
 
     def OpenEditor(self):
-        self.newWindow = tk.Toplevel(self.master)
-        self.app = ImageEditor.Editor(self.newWindow)
+        if data != 'Images/Accueil.jpg':
+            self.newWindow = tk.Toplevel(self.master)
+            self.app = ImageEditor.Editor(self.newWindow)
 
     def OpenFile(self):
         global data
-        data = askopenfilename()
+        temp = askopenfilename()
+        if len(temp) != 0 :
+            data = temp
+        self.Image()
         print(data)
 
 def ResizeImage(img, ScreenWidth):
