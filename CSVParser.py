@@ -15,12 +15,12 @@ def WriteCategorie(list):
 
 def ExportForm(list):
     with open('data.csv', mode='a') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_file, delimiter='|', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow(list)
 
 def ExisteDeja(image, formnane):
     with open('data.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=":")
+        csv_reader = csv.reader(csv_file, delimiter="|")
         for row in csv_reader:
             if len(row)!=0:
                 if (row[0]==image)&(row[2]==formnane):
@@ -29,7 +29,7 @@ def ExisteDeja(image, formnane):
 
 def FiltreCategorie(image):
     with open('data.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=':')
+        csv_reader = csv.reader(csv_file, delimiter='|')
         list = []
         for row in csv_reader:
             if len(row) != 0:
@@ -40,7 +40,7 @@ def FiltreCategorie(image):
 
 def FiltreName(image, categorie):
     with open('data.csv') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=':')
+        csv_reader = csv.reader(csv_file, delimiter='|')
         list = []
         for row in csv_reader:
             if len(row) != 0:
@@ -55,7 +55,7 @@ def SupprimeForm(test, image, categorie, name):
     print(categorie)
     print(name)
     with open('temp.csv', mode='a') as csv_temp:
-        csv_writer = csv.writer(csv_temp, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_temp, delimiter='|', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         with open('data.csv', mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=':')
             for row in csv_reader:
@@ -66,19 +66,19 @@ def SupprimeForm(test, image, categorie, name):
                         csv_writer.writerow(row)
 
     with open('data.csv', mode='w') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_file, delimiter='|', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow('')
 
     with open('data.csv', mode='a') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_file, delimiter='|', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         with open('temp.csv', mode='r') as csv_temp:
-            csv_reader = csv.reader(csv_temp, delimiter=':')
+            csv_reader = csv.reader(csv_temp, delimiter='|')
             for row in csv_reader:
                 if len(row) != 0:
                     csv_writer.writerow(row)
 
     with open('temp.csv', mode='w') as csv_file:
-        csv_writer = csv.writer(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_writer = csv.writer(csv_file, delimiter='|', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
         csv_writer.writerow('')
 
 def RecupCoord(image_name, category, form_name):
@@ -87,7 +87,7 @@ def RecupCoord(image_name, category, form_name):
     coords = []
 
     with open('data.csv', mode='r') as csv_file:
-        csv_reader = csv.reader(csv_file, delimiter=':', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
+        csv_reader = csv.reader(csv_file, delimiter='|', quotechar=' ', quoting=csv.QUOTE_MINIMAL)
 
         for line in csv_reader:
             if line: # On verifie que la liste ne soit pas vide

@@ -82,6 +82,13 @@ class Menu:
             temp=self.ListeName.curselection()
             tempname=int(temp[0])
         print(tempname)
+
+        onscreen = self.canvas.find_all()
+        for i in range(len(onscreen)):
+            if i != 0:
+                self.canvas.delete(onscreen[i])
+        self.TraceForme(data, self.ListeCategorie.get(tempcategorie), self.ListeName.get(tempname))
+
         if iscreate == 0:
             self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Supprimer', width=26)
             self.SupprButton.pack(side=TOP)
@@ -154,6 +161,28 @@ class Menu:
             data = temp
         self.Image()
         print(data)
+
+    def TraceForme(self, data, tempcategorie, tempname):
+        donnee = CSVParser.RecupCoord(data, tempcategorie, tempname)
+        typeform = donnee[0]
+        coordonnee = donnee[1]
+        echelle = donnee[2]
+
+        if typeform == "Square":
+            self.canvas.create_rectangle(coordonnee[0][0], coordonnee[0][1], coordonnee[1][0], coordonnee[1][1], width=2, outline="black")
+            self.draw = echelle
+
+        if typeform == "Circle":
+            self.canvas.create_oval(coordonnee[0][0], coordonnee[0][1], coordonnee[1][0], coordonnee[1][1], width=2, outline="black")
+            self.draw = echelle
+
+        if typeform == "Free":
+            for i in range(len(coordonnee)):
+                if i < len(coordonnee) - 1:
+                    self.canvas.create_line(coordonnee[i][0], coordonnee[i][1], coordonnee[i + 1][0], coordonnee[i + 1][1], width=2)
+                if i == len(coordonnee) - 1:
+                    self.canvas.create_line(coordonnee[0][0], coordonnee[0][1], coordonnee[i][0], coordonnee[i][1], width=2)
+
 
 def ResizeImage(img, ScreenWidth):
     originalWidth, originalHeight = img.size
