@@ -10,7 +10,7 @@ tempcategorie = 0
 tempname = 0
 iscreate = 0
 canvas = 0
-data = 'Images/Accueil.jpg'
+data = 'Accueil.jpg'
 
 class Menu:
     def __init__(self, master):
@@ -132,7 +132,7 @@ class Menu:
         imgfullsize = Image.open(data)
         self.imagename = data
         OriginalWidth, OriginalHeight = imgfullsize.size
-        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
+        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth(), self.master.winfo_screenheight())
         ResizedWidth, ResizedHeight = img.size
         self.scale = OriginalWidth/ResizedWidth
         img = ImageTk.PhotoImage(img)
@@ -184,6 +184,9 @@ class Menu:
                     self.canvas.create_line(coordonnee[0][0], coordonnee[0][1], coordonnee[i][0], coordonnee[i][1], width=2)
 
 
-def ResizeImage(img, ScreenWidth):
+def ResizeImage(img, ScreenWidth, ScreenHeight):
     originalWidth, originalHeight = img.size
-    return img.resize((int(ScreenWidth / 2), int(((ScreenWidth / 2) / originalWidth) * originalHeight)))
+    if (originalWidth > originalHeight) & ((ScreenWidth * 0.5 / originalWidth * originalHeight) < (ScreenHeight * 0.6)):
+        return img.resize((int(ScreenWidth * 0.5), int((ScreenWidth * 0.5) / originalWidth * originalHeight)))
+    else:
+        return img.resize((int((ScreenHeight * 0.6) / originalHeight * originalWidth), int(ScreenHeight * 0.6)))

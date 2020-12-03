@@ -19,9 +19,14 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="383198be-4e9f-45cf-a126-d815f7ec971c" name="Default Changelist" comment="">
+    <list default="true" id="383198be-4e9f-45cf-a126-d815f7ec971c" name="Default Changelist" comment="correction bug CSV Parser">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSVParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSVParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GraphicalInterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphicalInterface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ImageEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImageEditor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/Accueil.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/Accueil.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Images/PhotoChat.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/categorie.csv" beforeDir="false" afterPath="$PROJECT_DIR$/categorie.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/temp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temp.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -59,6 +64,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\tquil\PycharmProjects\ImageAreaSelectionProject" />
       <recent name="C:\Users\tquil\PycharmProjects\ImageAreaSelectionProject\Images" />
     </key>
   </component>
@@ -218,7 +224,14 @@
       <option name="project" value="LOCAL" />
       <updated>1606916733506</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="correction bug CSV Parser">
+      <created>1607006230672</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1607006230672</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -257,6 +270,7 @@
     <MESSAGE value="Correction bug + refresh image" />
     <MESSAGE value="Beta 1.0&#10;&#10;Bugs presents :&#10;- Probleme affichage forme si son nom comporte un espace&#10;- Peut etre probleme avec l'échelle quand passage d'un pc à un autre (A verif)" />
     <MESSAGE value="ajout setup pour exe" />
-    <option name="LAST_COMMIT_MESSAGE" value="ajout setup pour exe" />
+    <MESSAGE value="correction bug CSV Parser" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction bug CSV Parser" />
   </component>
 </project>
