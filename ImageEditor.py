@@ -147,7 +147,7 @@ class Editor:
         imgfullsize = Image.open(GraphicalInterface.data)
         self.imagename = GraphicalInterface.data
         OriginalWidth, OriginalHeight = imgfullsize.size
-        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth(), self.master.winfo_screenheight())
+        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
         ResizedWidth, ResizedHeight = img.size
         self.scale = OriginalWidth/ResizedWidth
         img = ImageTk.PhotoImage(img)
@@ -205,12 +205,9 @@ class Editor:
                 CSVParser.ExportForm(form)
                 self.Reset()
 
-def ResizeImage(img, ScreenWidth, ScreenHeight):
+def ResizeImage(img, ScreenWidth):
     originalWidth, originalHeight = img.size
-    if (originalWidth > originalHeight) & ((ScreenWidth * 0.5 / originalWidth * originalHeight) < (ScreenHeight * 0.6)):
-        return img.resize((int(ScreenWidth * 0.5), int((ScreenWidth * 0.5) / originalWidth * originalHeight)))
-    else:
-        return img.resize((int((ScreenHeight * 0.6) / originalHeight * originalWidth), int(ScreenHeight * 0.6)))
+    return img.resize((int(ScreenWidth / 2), int(((ScreenWidth / 2) / originalWidth) * originalHeight)))
 
 def GetMousePos(event):
     global x
