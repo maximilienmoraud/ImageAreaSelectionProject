@@ -19,16 +19,10 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="383198be-4e9f-45cf-a126-d815f7ec971c" name="Default Changelist" comment="correction bug CSV Parser">
+    <list default="true" id="383198be-4e9f-45cf-a126-d815f7ec971c" name="Default Changelist" comment="correction bug">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CSVParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/CSVParser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GraphicalInterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphicalInterface.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImageEditor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data.csv" beforeDir="false" afterPath="$PROJECT_DIR$/data.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/installer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/installer.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/setup.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/temp.csv" beforeDir="false" afterPath="$PROJECT_DIR$/temp.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -232,7 +226,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607006230672</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="correction bug">
+      <created>1607344740677</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1607344740677</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,12 +267,12 @@
     <MESSAGE value="partie ImageEditor finie&#10;partie CSVParser avancée" />
     <MESSAGE value="modif csv et GraphicalInterface" />
     <MESSAGE value="modif interface graphique&#10;ajout fonction suppr csv" />
-    <MESSAGE value="correction bug" />
     <MESSAGE value="ajout ouvrir file ok salim" />
     <MESSAGE value="Correction bug + refresh image" />
     <MESSAGE value="Beta 1.0&#10;&#10;Bugs presents :&#10;- Probleme affichage forme si son nom comporte un espace&#10;- Peut etre probleme avec l'échelle quand passage d'un pc à un autre (A verif)" />
     <MESSAGE value="ajout setup pour exe" />
     <MESSAGE value="correction bug CSV Parser" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction bug CSV Parser" />
+    <MESSAGE value="correction bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="correction bug" />
   </component>
 </project>

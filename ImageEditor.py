@@ -83,7 +83,6 @@ class Editor:
             self.NameSelection.insert(END, select)
 
     def Square(self):
-        print('def square')
         global formtype
         formtype = "Square"
         self.Reset()
@@ -97,7 +96,6 @@ class Editor:
         self.AlerteSave.configure(foreground='#2B2B2B')
 
     def Circle(self):
-        print('def Circle')
         global formtype
         formtype = "Circle"
         self.Reset()
@@ -111,7 +109,6 @@ class Editor:
         self.AlerteSave.configure(foreground='#2B2B2B')
 
     def Free(self):
-        print('def Free')
         global formtype
         formtype = "Free"
         self.Reset()

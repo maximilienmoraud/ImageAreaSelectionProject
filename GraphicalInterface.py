@@ -67,21 +67,18 @@ class Menu:
     def SelectCategorie(self, event):
         global tempcategorie
         if len(self.ListeCategorie.curselection()) > 0:
-            temp=self.ListeCategorie.curselection()
+            temp = self.ListeCategorie.curselection()
             tempcategorie = int(temp[0])
             self.ActualiseCategorie()
             self.ActualiseName()
         self.ActualiseCategorie()
-        print(tempcategorie)
 
     def SelectName(self, event):
         global tempname
         global iscreate
-        print('new selected name')
         if len(self.ListeName.curselection()) > 0:
             temp = self.ListeName.curselection()
             tempname = int(temp[0])
-        print(tempname)
 
         onscreen = self.canvas.find_all()
         for i in range(len(onscreen)):
@@ -92,16 +89,12 @@ class Menu:
         if iscreate == 0:
             self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Supprimer', width=26)
             self.SupprButton.pack(side=TOP)
-            print(tempcategorie)
-            print(tempname)
             self.SupprButton.bind('<Button-1>', lambda a='test', b=data, c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
             iscreate = 1
         if iscreate == 1:
             self.SupprButton.destroy()
             self.SupprButton = tk.Button(self.ListFrame, font=self.fontStyle2, background='#3B3F42', foreground='white', text='Supprimer', width=26)
             self.SupprButton.pack(side=TOP)
-            print(tempcategorie)
-            print(tempname)
             self.SupprButton.bind('<Button-1>', lambda a='test', b=data, c=self.ListeCategorie.get(tempcategorie), d=self.ListeName.get(tempname): CSVParser.SupprimeForm(a, b, c, d))
 
     def ActualiseCategorie(self):
@@ -113,7 +106,6 @@ class Menu:
             self.ListeCategorie.insert(END, categorie[j])
             j = j + 1
         self.ListeCategorie.selection_set(tempcategorie)
-        print('Actualisation Categorie Ok')
 
     def ActualiseName(self):
         name = CSVParser.FiltreName(data, self.ListeCategorie.get(tempcategorie))
@@ -124,7 +116,6 @@ class Menu:
             self.ListeName.insert(END, name[l])
             l = l + 1
         self.ListeCategorie.selection_set(0)
-        print('Actualisation Name Ok')
 
     def Image(self):
         global canvas
@@ -149,7 +140,7 @@ class Menu:
             self.canvas.create_image(0, 0, image=img, anchor=tk.NW)
 
     def OpenEditor(self):
-        if data != 'Images/Accueil.jpg':
+        if data != 'Accueil.jpg':
             self.newWindow = tk.Toplevel(self.master)
             self.app = ImageEditor.Editor(self.newWindow)
 
@@ -159,7 +150,6 @@ class Menu:
         if len(temp) != 0:
             data = temp
         self.Image()
-        print(data)
 
     def TraceForme(self, data, tempcategorie, tempname):
         donnee = CSVParser.RecupCoord(data, tempcategorie, tempname)
@@ -181,7 +171,6 @@ class Menu:
                     self.canvas.create_line(coordonnee[i][0], coordonnee[i][1], coordonnee[i + 1][0], coordonnee[i + 1][1], width=2)
                 if i == len(coordonnee) - 1:
                     self.canvas.create_line(coordonnee[0][0], coordonnee[0][1], coordonnee[i][0], coordonnee[i][1], width=2)
-
 
 def ResizeImage(img, ScreenWidth, ScreenHeight):
     originalWidth, originalHeight = img.size
