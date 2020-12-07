@@ -19,7 +19,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="383198be-4e9f-45cf-a126-d815f7ec971c" name="Default Changelist" comment="correction bug">
+    <list default="true" id="383198be-4e9f-45cf-a126-d815f7ec971c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GraphicalInterface.py" beforeDir="false" afterPath="$PROJECT_DIR$/GraphicalInterface.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ImageEditor.py" beforeDir="false" afterPath="$PROJECT_DIR$/ImageEditor.py" afterDir="false" />
@@ -233,7 +233,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607344740677</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="code propre">
+      <created>1607345268089</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1607345268089</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -273,6 +280,7 @@
     <MESSAGE value="ajout setup pour exe" />
     <MESSAGE value="correction bug CSV Parser" />
     <MESSAGE value="correction bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="correction bug" />
+    <MESSAGE value="code propre" />
+    <option name="LAST_COMMIT_MESSAGE" value="code propre" />
   </component>
 </project>

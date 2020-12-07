@@ -174,7 +174,7 @@ class Menu:
 
 def ResizeImage(img, ScreenWidth, ScreenHeight):
     originalWidth, originalHeight = img.size
-    if (originalWidth > originalHeight) & ((ScreenWidth * 0.5 / originalWidth * originalHeight) < (ScreenHeight * 0.6)):
+    if (originalWidth > originalHeight) & ((ScreenWidth * 0.5 / originalWidth * originalHeight) < (ScreenHeight * 0.5)):
         return img.resize((int(ScreenWidth * 0.5), int((ScreenWidth * 0.5) / originalWidth * originalHeight)))
     else:
-        return img.resize((int((ScreenHeight * 0.6) / originalHeight * originalWidth), int(ScreenHeight * 0.6)))
+        return img.resize((int((ScreenHeight * 0.5) / originalHeight * originalWidth), int(ScreenHeight * 0.5)))
