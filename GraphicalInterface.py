@@ -66,9 +66,9 @@ class Menu:
 
     def SelectCategorie(self, event):
         global tempcategorie
-        if len(self.ListeCategorie.curselection())>0:
+        if len(self.ListeCategorie.curselection()) > 0:
             temp=self.ListeCategorie.curselection()
-            tempcategorie=int(temp[0])
+            tempcategorie = int(temp[0])
             self.ActualiseCategorie()
             self.ActualiseName()
         self.ActualiseCategorie()
@@ -78,9 +78,9 @@ class Menu:
         global tempname
         global iscreate
         print('new selected name')
-        if len(self.ListeName.curselection())>0:
-            temp=self.ListeName.curselection()
-            tempname=int(temp[0])
+        if len(self.ListeName.curselection()) > 0:
+            temp = self.ListeName.curselection()
+            tempname = int(temp[0])
         print(tempname)
 
         onscreen = self.canvas.find_all()
@@ -127,12 +127,11 @@ class Menu:
         print('Actualisation Name Ok')
 
     def Image(self):
-        # Fonction qui permet d'afficher l'image
         global canvas
         imgfullsize = Image.open(data)
         self.imagename = data
         OriginalWidth, OriginalHeight = imgfullsize.size
-        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth())
+        img = ResizeImage(imgfullsize, self.master.winfo_screenwidth(), self.master.winfo_screenheight())
         ResizedWidth, ResizedHeight = img.size
         self.scale = OriginalWidth/ResizedWidth
         img = ImageTk.PhotoImage(img)
@@ -157,7 +156,7 @@ class Menu:
     def OpenFile(self):
         global data
         temp = askopenfilename()
-        if len(temp) != 0 :
+        if len(temp) != 0:
             data = temp
         self.Image()
         print(data)
@@ -184,6 +183,9 @@ class Menu:
                     self.canvas.create_line(coordonnee[0][0], coordonnee[0][1], coordonnee[i][0], coordonnee[i][1], width=2)
 
 
-def ResizeImage(img, ScreenWidth):
+def ResizeImage(img, ScreenWidth, ScreenHeight):
     originalWidth, originalHeight = img.size
-    return img.resize((int(ScreenWidth / 2), int(((ScreenWidth / 2) / originalWidth) * originalHeight)))
+    if (originalWidth > originalHeight) & ((ScreenWidth * 0.5 / originalWidth * originalHeight) < (ScreenHeight * 0.6)):
+        return img.resize((int(ScreenWidth * 0.5), int((ScreenWidth * 0.5) / originalWidth * originalHeight)))
+    else:
+        return img.resize((int((ScreenHeight * 0.6) / originalHeight * originalWidth), int(ScreenHeight * 0.6)))

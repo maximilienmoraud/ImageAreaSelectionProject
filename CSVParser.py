@@ -1,6 +1,4 @@
-#import pandas as pd
 import csv
-import GraphicalInterface
 
 def ReadCategorie():
     with open('categorie.csv') as csv_file:
@@ -22,8 +20,8 @@ def ExisteDeja(image, formnane):
     with open('data.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter="|")
         for row in csv_reader:
-            if len(row)!=0:
-                if (row[0]==image)&(row[2]==formnane):
+            if len(row) != 0:
+                if (row[0] == image) & (row[2] == formnane):
                     return True
     return False
 
@@ -44,24 +42,19 @@ def FiltreName(image, categorie):
         list = []
         for row in csv_reader:
             if len(row) != 0:
-                if (row[0] == image)&(row[1] == categorie):
+                if (row[0] == image) & (row[1] == categorie):
                     list.append(row[2])
         return list
 
 def SupprimeForm(test, image, categorie, name):
-    print(GraphicalInterface.tempcategorie)
-    print(GraphicalInterface.tempname)
-    print(image)
-    print(categorie)
-    print(name)
     with open('temp.csv', mode='a') as csv_temp:
         csv_writer = csv.writer(csv_temp, delimiter='|')
         with open('data.csv', mode='r') as csv_file:
             csv_reader = csv.reader(csv_file, delimiter='|')
             for row in csv_reader:
                 if len(row) != 0:
-                    if (row[0] == image)&(row[1] == categorie)&(row[2] == name):
-                        print('supprime')
+                    if (row[0] == image) & (row[1] == categorie) & (row[2] == name):
+                        print('Supprime')
                     else:
                         csv_writer.writerow(row)
 
@@ -88,9 +81,8 @@ def RecupCoord(image_name, category, form_name):
 
     with open('data.csv', mode='r') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter='|')
-
         for line in csv_reader:
-            if line: # On verifie que la liste ne soit pas vide
+            if line:
                 if line[:3] == [image_name, category, form_name]:
                     form_type = line[3]
                     scale = float(line[5])
