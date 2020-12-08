@@ -54,7 +54,7 @@ def SupprimeForm(test, image, categorie, name):
             for row in csv_reader:
                 if len(row) != 0:
                     if (row[0] == image) & (row[1] == categorie) & (row[2] == name):
-                        print('Supprime')
+                        continue
                     else:
                         csv_writer.writerow(row)
 

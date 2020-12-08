@@ -195,7 +195,6 @@ class Editor:
                 self.NameSelection.configure(background='#2B2B2B')
                 self.SaveButton.configure(background='green')
                 self.AlerteSave.configure(foreground='green')
-                print(self.imagename, self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale)
                 form = [self.imagename, self.AutreCategorie.get(), self.NameSelection.get(), formtype, self.coords,  self.scale]
                 CSVParser.ExportForm(form)
                 self.Reset()
